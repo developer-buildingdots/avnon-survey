@@ -1,0 +1,10 @@
+<div class="answer">
+    <h2>Form Answers</h2>
+    <div *ngFor="let question of questions; let index = index;">
+        <h3>Question {{index + 1}}: {{question.question}}</h3>
+        <p>
+            Answer: {{question.answer}}
+        </p>
+    </div>
+    <a routerLink="/form/builder">Back to Form Builder</a>
+</div>

@@ -1,0 +1,35 @@
+<h1 mat-dialog-title>Add Question</h1>
+<form [formGroup]="questionForm" (ngSubmit)="close()">
+  <div mat-dialog-content>
+
+    <p>What's your question?</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Question</mat-label>
+      <textarea matInput formControlName="question"></textarea>
+    </mat-form-field>
+    <p>What's your question types?</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Question Type</mat-label>
+      <mat-select formControlName="type">
+        <mat-option *ngFor="let type of types" [value]="type.type">
+          {{type.label}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <ng-container *ngIf="containsOptions()">
+      <p>Options</p>
+      <div formArrayName="options">
+        <div *ngFor="let t of options.controls; let index = index;">
+          <mat-form-field appearance="fill">
+            <mat-label for="options-{{index}}">Option {{index + 1}}</mat-label>
+            <input matInput id="options-{{index}}" [formControlName]="index">
+          </mat-form-field>
+        </div>
+      </div>
+      <button mat-button (click)="addMoreOptions()">Add More Option</button>
+    </ng-container>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button>Add Question</button>
+  </div>
+</form>

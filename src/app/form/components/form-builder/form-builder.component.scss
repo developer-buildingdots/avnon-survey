@@ -1,0 +1,24 @@
+
+.builders {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0% 10%;
+    flex-direction: column;
+    form {
+        min-width: 90%;
+    }
+    mat-form-field {
+        width: 50%;
+    }
+    mat-checkbox {
+        padding: 0% 10px;
+    }
+    mat-radio-button {
+        margin: auto;
+    }
+    .add_more {
+        margin-top: 30px;
+    }
+    
+}

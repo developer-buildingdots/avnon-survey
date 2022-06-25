@@ -1,0 +1,38 @@
+<div class="builders">
+    <h2>Form Builder</h2>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+        <div formArrayName="answers">
+            <div *ngFor="let question of questions; let index = index;">
+                <h3>Question {{index + 1}}: {{question.question}}</h3>
+                <div [ngSwitch]="question.type">
+                    <mat-form-field appearance="fill" *ngSwitchCase="'textarea'">
+                        <mat-label>Answer</mat-label>
+                        <textarea matInput id="answers-{{index}}" [formControlName]="index"></textarea>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" *ngSwitchCase="'input'">
+                        <mat-label>Answer</mat-label>
+                        <input matInput id="answers-{{index}}" [formControlName]="index">
+                    </mat-form-field>
+                    <div *ngSwitchCase="'radio'">
+                        <mat-radio-group aria-label="Select an option" id="answers-{{index}}" [formControlName]="index">
+                            <mat-radio-button *ngFor="let op of question.options" [value]="op">{{op}}</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <div *ngSwitchCase="'checkbox'">
+                        <div formArrayName="{{index}}">
+                            <ng-container *ngFor="let op of question.options; let i = index;">
+                                <mat-checkbox id="answers-{{index}}-{{i}}" [formControlName]="i">{{op}}</mat-checkbox>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="add_more">
+            <button mat-raised-button color="success" *ngIf="questions.length" type="submit">Review My Answers</button>
+        </div>
+    </form>
+    <div class="add_more">
+        <button mat-raised-button color="primary" (click)="addQuestion()">Add Question</button>
+    </div>
+</div>
